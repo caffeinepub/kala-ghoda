@@ -1,0 +1,331 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Kala Ghoda – Premium Dark-Themed Nightclub Website (Frontend)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Implement black-and-gold luxury design system with deep black backgrounds, gold accents, luxury fonts, hover effects, and smooth transitions",
+      "acceptanceCriteria": [
+        "All pages use deep black backgrounds with gold accent colors consistently",
+        "Headings render in a bold luxury display font loaded from Google Fonts",
+        "Interactive elements (buttons, links, cards) display gold hover/glow effects",
+        "Page transitions are smooth (fade or slide) between routes",
+        "Design is visually cohesive and premium across all pages"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Import Google Fonts (Cinzel for headings, Inter for body). Define CSS custom properties for brand colors: --color-black-primary: #0a0a0a, --color-black-secondary: #111111, --color-gold: #C9A84C, --color-gold-bright: #FFD700. Add base body styles with deep black background. Define global animation keyframes for gold glow effects and fade transitions."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme with custom colors matching the black-and-gold palette (black-primary, black-secondary, gold, gold-bright). Add custom font families for headings (Cinzel) and body (Inter). Configure transition durations for smooth page/element transitions. Add custom box-shadow utilities for gold glow effects."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Build Home Page with hero video, logo, CTAs, About section, Upcoming Events preview, Gallery preview, Contact section, and Footer",
+      "acceptanceCriteria": [
+        "Hero video fills the full viewport, auto-plays muted and loops",
+        "'Kala Ghoda' logo/wordmark and tagline are centered over the hero",
+        "Both CTA buttons are visible and functional (navigate to Events page or Book Now flow)",
+        "About section renders introductory club description text",
+        "Upcoming events preview shows up to 3 event cards pulled from backend data",
+        "Gallery preview section displays a responsive image grid",
+        "Contact section includes an embedded map placeholder, phone number, and Instagram link",
+        "Footer displays Instagram, Facebook, and WhatsApp icons with placeholder links"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "create",
+          "description": "Create Home Page component with all required sections in order: (1) Full-screen hero with background video (with fallback to frontend/public/assets/generated/hero-fallback.dim_1920x1080.png), logo wordmark from frontend/public/assets/generated/logo-wordmark.dim_600x200.png, tagline 'Where Nights Come Alive', and two CTA buttons linking to /events and a placeholder booking flow. (2) About section with intro text. (3) Upcoming Events preview fetching top 3 events via getRecentUpcomingEvents and displaying event cards with poster, title, date, short description. (4) Gallery preview grid using the 6 generated gallery images (frontend/public/assets/generated/gallery-1.dim_800x600.png through gallery-6.dim_800x600.png). (5) Contact section with iframe map placeholder, phone number, and Instagram link. (6) Newsletter subscription section (see REQ-10). (7) Footer with social media icons. Apply scroll-reveal animations as per REQ-8."
+        },
+        {
+          "path": "frontend/src/hooks/useGetRecentUpcomingEvents.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch recent upcoming events from backend using getRecentUpcomingEvents(). Return events array, loading state, and error state."
+        },
+        {
+          "path": "frontend/src/components/EventCard.tsx",
+          "operation": "create",
+          "description": "Create reusable EventCard component displaying event poster image, title, date/time (formatted), short description, and a 'View Details' button linking to /events/:id. Accept event data as props. Apply gold hover effects and styling consistent with design system."
+        },
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "create",
+          "description": "Create Footer component displaying social media icons (Instagram, Facebook, WhatsApp) with placeholder links. Style with black background and gold accents."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Build Events Page displaying all events in responsive grid, with upcoming events prioritized and past events visually distinguished",
+      "acceptanceCriteria": [
+        "Route /events renders correctly",
+        "Events are fetched from the backend and displayed in a responsive grid",
+        "Each card shows poster image, title, date/time, short description, and 'View Details' button",
+        "Upcoming events are prioritized in sort order",
+        "Past events are visually differentiated from upcoming ones"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/EventsPage.tsx",
+          "operation": "create",
+          "description": "Create Events Page component fetching all events via getAllEvents(). Sort events with upcoming first. Render EventCard components in a responsive grid layout (Tailwind grid). Apply desaturation or label styling to past events. Apply scroll-reveal animations to event cards as per REQ-8."
+        },
+        {
+          "path": "frontend/src/hooks/useGetAllEvents.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch all events from backend using getAllEvents(). Return events array, loading state, and error state."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Build Individual Event Detail Page with banner, description, photo gallery slider with lightbox, video player, ticket price, Book Now button, and countdown timer",
+      "acceptanceCriteria": [
+        "Route /events/:id loads event data from backend by ID",
+        "Large banner image renders at full width",
+        "Photo gallery slider shows multiple event photos with lightbox on click",
+        "Embedded video player renders using the event's video URL",
+        "Ticket price is clearly displayed",
+        "'Book Now' button is prominent and styled with gold accent",
+        "Countdown timer accurately counts down to the event date/time and updates every second"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/EventDetailPage.tsx",
+          "operation": "create",
+          "description": "Create Event Detail Page component accepting eventId from route params. Fetch event data via getEventById(eventId). Display full-width banner using posterImage. Render full description. Include photo gallery slider for galleryImages array with lightbox click handler. Embed video player using videoUrl. Display ticket price prominently. Add 'Book Now' button (placeholder action). Include countdown timer component counting down to eventDateTime."
+        },
+        {
+          "path": "frontend/src/hooks/useGetEventById.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch a single event by ID from backend using getEventById(eventId). Accept eventId as parameter. Return event data, loading state, and error state."
+        },
+        {
+          "path": "frontend/src/components/CountdownTimer.tsx",
+          "operation": "create",
+          "description": "Create CountdownTimer component accepting target date/time as prop. Use React state and setInterval to update countdown every second. Display days, hours, minutes, seconds remaining. Style with gold accents."
+        },
+        {
+          "path": "frontend/src/components/PhotoGallerySlider.tsx",
+          "operation": "create",
+          "description": "Create PhotoGallerySlider component accepting array of image URLs. Implement horizontal scrollable or slider UI. On image click, open lightbox modal displaying full-size image with navigation controls. Use gold styling for controls."
+        },
+        {
+          "path": "frontend/src/components/Lightbox.tsx",
+          "operation": "create",
+          "description": "Create Lightbox modal component for full-screen image viewing. Accept image URL and onClose handler. Include navigation controls for prev/next if part of a gallery. Style overlay with semi-transparent black and gold controls."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Build secure Admin Dashboard with login screen, session validation, and event management UI (add, edit, delete, upload, toggle status)",
+      "acceptanceCriteria": [
+        "Navigating to /admin without a valid session redirects to /admin/login",
+        "Login form accepts credentials and stores session token on success",
+        "Admin dashboard lists all events with Edit, Delete, and Toggle Status actions",
+        "Add/Edit event form includes fields for all event data model properties",
+        "Photo upload supports selecting multiple images (stored as base64 or data URLs)",
+        "Deleting an event requires a confirmation step",
+        "Changes made in admin are immediately reflected on the Home, Events, and Event Detail pages"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/AdminLoginPage.tsx",
+          "operation": "create",
+          "description": "Create Admin Login Page with a form accepting username and password. On submit, call backend initialize() (which verifies credentials and assigns admin role). On success, use React Query to invalidate and refetch user role/profile, then redirect to /admin. Store authentication state via the authorization component's Internet Identity system."
+        },
+        {
+          "path": "frontend/src/pages/AdminDashboardPage.tsx",
+          "operation": "create",
+          "description": "Create Admin Dashboard Page protected by admin role check (verify isCallerAdmin() returns true; redirect to /admin/login if false). Display a table or list of all events fetched via getAllEvents(). For each event, provide Edit, Delete, and Toggle Status action buttons. Include a button to navigate to Add Event page. Invalidate events query cache after mutations."
+        },
+        {
+          "path": "frontend/src/pages/AdminAddEventPage.tsx",
+          "operation": "create",
+          "description": "Create Add Event Page with a form containing fields for title, shortDescription, fullDescription, eventDateTime (date/time picker), ticketPrice (number input), posterImage (file upload with base64 conversion), galleryImages (multiple file upload with base64 conversion), and videoUrl (text input). On submit, call createEvent() mutation. Redirect to /admin on success. Apply gold styling to form elements."
+        },
+        {
+          "path": "frontend/src/pages/AdminEditEventPage.tsx",
+          "operation": "create",
+          "description": "Create Edit Event Page accepting eventId from route params. Fetch event via getEventById(eventId) and pre-populate form fields. Include same fields as Add Event form. On submit, call updateEvent() mutation. Redirect to /admin on success."
+        },
+        {
+          "path": "frontend/src/hooks/useCreateEvent.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook to call createEvent() with all event fields. Invalidate events queries on success."
+        },
+        {
+          "path": "frontend/src/hooks/useUpdateEvent.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook to call updateEvent() with eventId and updated fields. Invalidate events queries on success."
+        },
+        {
+          "path": "frontend/src/hooks/useDeleteEvent.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook to call deleteEvent(eventId). Invalidate events queries on success."
+        },
+        {
+          "path": "frontend/src/hooks/useToggleEventStatus.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook to call toggleEventStatus(eventId). Invalidate events queries on success."
+        },
+        {
+          "path": "frontend/src/components/AdminRoute.tsx",
+          "operation": "create",
+          "description": "Create AdminRoute wrapper component that checks if user is authenticated and has admin role (via isCallerAdmin()). If not, redirect to /admin/login. Use this wrapper for all admin pages."
+        },
+        {
+          "path": "frontend/src/components/ConfirmDeleteModal.tsx",
+          "operation": "create",
+          "description": "Create ConfirmDeleteModal component accepting event title and onConfirm/onCancel handlers. Display confirmation message. Style with black background and gold buttons."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Add scroll-reveal animations (fade-in + upward translate) to Home Page sections and Events Page cards",
+      "acceptanceCriteria": [
+        "Elements off-screen are initially invisible",
+        "Sections animate in (fade + translate) as they enter the viewport during scroll",
+        "Animations trigger once and do not repeat on scroll-up",
+        "Animations do not cause layout shifts or performance issues"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useScrollReveal.ts",
+          "operation": "create",
+          "description": "Create custom React hook using IntersectionObserver to detect when elements enter the viewport. Return a ref to attach to target elements and an isVisible boolean. Trigger animation class when isVisible becomes true. Configure to trigger once only."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Apply useScrollReveal hook to About section, Upcoming Events cards, Gallery preview, Contact section, and Newsletter section. Add animation classes (fade-in + translateY) that activate when elements become visible."
+        },
+        {
+          "path": "frontend/src/pages/EventsPage.tsx",
+          "operation": "modify",
+          "description": "Apply useScrollReveal hook to each EventCard component. Stagger animation delays slightly for visual effect."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Add floating WhatsApp booking button fixed to bottom-right on all pages",
+      "acceptanceCriteria": [
+        "WhatsApp button is visible and fixed to bottom-right on all pages",
+        "Clicking the button opens WhatsApp with a pre-filled booking message",
+        "Button is styled with brand-consistent gold border and WhatsApp green",
+        "Button does not obscure critical page content"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/WhatsAppButton.tsx",
+          "operation": "create",
+          "description": "Create WhatsAppButton component rendering a fixed-position floating button in the bottom-right corner. Link to wa.me/ format URL with pre-filled message: 'Hi, I'd like to book a table at Kala Ghoda'. Style with WhatsApp green background, gold border, and hover glow effect. Use WhatsApp icon."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render WhatsAppButton component at the root level so it appears on all pages. Position it outside the main route content area."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Add Newsletter Subscription section on Home Page with email input and Subscribe button",
+      "acceptanceCriteria": [
+        "Newsletter section renders above the footer on the Home page",
+        "Email input validates format before submission",
+        "On successful submission, a confirmation message is shown",
+        "Subscriber email is persisted in backend storage",
+        "Admin dashboard shows a count or list of subscribers"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/NewsletterSection.tsx",
+          "operation": "create",
+          "description": "Create NewsletterSection component with heading 'Stay in the Loop', brief description, email input field with validation, and 'Subscribe' button. On submit, call subscribeNewsletter(email) mutation. Display success confirmation message on successful submission. Apply gold styling to button and input focus states."
+        },
+        {
+          "path": "frontend/src/hooks/useSubscribeNewsletter.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook to call subscribeNewsletter(email). Handle success and error states."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Import and render NewsletterSection component above the Footer component. Apply scroll-reveal animation."
+        },
+        {
+          "path": "frontend/src/pages/AdminDashboardPage.tsx",
+          "operation": "modify",
+          "description": "Add a section displaying newsletter subscribers count or list by calling listSubscribers() query. Display in a simple table or list format."
+        },
+        {
+          "path": "frontend/src/hooks/useListSubscribers.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch newsletter subscribers from backend using listSubscribers(). Return subscribers array, loading state, and error state."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Wire generated image assets into the frontend as static assets for hero fallback, logo, event posters, and gallery",
+      "acceptanceCriteria": [
+        "Hero fallback image renders correctly if video is unavailable",
+        "Logo image is displayed in the hero section and navbar",
+        "Three distinct event poster images are used for seeded demo events",
+        "Six gallery images populate the home page gallery grid",
+        "All images are served from frontend/public/assets/generated"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Reference frontend/public/assets/generated/hero-fallback.dim_1920x1080.png as fallback image for hero video. Reference frontend/public/assets/generated/logo-wordmark.dim_600x200.png for logo display. Reference gallery-1.dim_800x600.png through gallery-6.dim_800x600.png for gallery grid images."
+        },
+        {
+          "path": "frontend/src/components/EventCard.tsx",
+          "operation": "modify",
+          "description": "Ensure EventCard component correctly renders poster images from event.posterImage field, which will contain references to generated poster images for seeded demo events."
+        }
+      ]
+    },
+    {
+      "id": "REQ-1",
+      "summary": "Wire all pages and components into App router and ensure navigation",
+      "acceptanceCriteria": [
+        "All pages are accessible via their defined routes",
+        "Navigation between pages works correctly",
+        "Admin routes are protected and redirect to login if not authenticated",
+        "Page transitions are smooth"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Configure React Router with routes: / (HomePage), /events (EventsPage), /events/:id (EventDetailPage), /admin/login (AdminLoginPage), /admin (AdminDashboardPage wrapped in AdminRoute), /admin/events/add (AdminAddEventPage wrapped in AdminRoute), /admin/events/edit/:id (AdminEditEventPage wrapped in AdminRoute). Import and render WhatsAppButton globally. Apply route transition animations (fade effect)."
+        },
+        {
+          "path": "frontend/src/components/Navbar.tsx",
+          "operation": "create",
+          "description": "Create Navbar component with logo (using frontend/public/assets/generated/logo-wordmark.dim_600x200.png), navigation links to Home, Events, and Admin (if user is admin). Include login/logout button using the authorization component's Internet Identity system. Style with black background and gold accents. Make navbar sticky or fixed at top."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render Navbar component at the top level so it appears on all pages."
+        }
+      ]
+    }
+  ]
+}

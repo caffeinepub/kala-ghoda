@@ -1,0 +1,4 @@
+{
+  "frontend/src/App.tsx": "Main application entry point that sets up TanStack Router with code-based routing for all pages (Home, Events, Event Detail, Admin Login, Admin Dashboard, Add/Edit Event), wraps admin routes with the AdminRoute guard, and renders the root layout with Navbar, page Outlet, and WhatsApp button.",
+  "frontend/src/pages/AdminEventFormPage.tsx": "Reusable admin form page component supporting both \"add\" and \"edit\" modes for events, with fields for all event properties (title, descriptions, date/time, ticket price, video URL, poster image upload, and multi-image gallery upload with base64 conversion), pre-populated from backend data in edit mode."
+}

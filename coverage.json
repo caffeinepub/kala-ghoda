@@ -1,0 +1,308 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-24T11:21:25.069Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 12,
+    "implemented": 9,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Implement a black-and-gold luxury design system across the entire app: deep black backgrounds (#0a0a0a, #111111), gold accent color (#C9A84C / #FFD700 range), bold serif or display font for headings (e.g. Cinzel or Playfair Display via Google Fonts), modern sans-serif for body text, gold hover effects on interactive elements, subtle gold glow animations on key UI elements, and smooth page transitions throughout.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/Navbar.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/Navbar.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-10",
+        "summary": "Add a Newsletter Subscription section on the Home Page (above the footer). It should include a heading like 'Stay in the Loop', a brief description, an email input field, and a 'Subscribe' button. Store subscriber emails in the backend with a subscribeNewsletter(email) function and a listSubscribers query for admin visibility.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/NewsletterSection.tsx",
+          "frontend/src/hooks/useSubscribeNewsletter.ts",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/AdminDashboardPage.tsx",
+          "frontend/src/hooks/useListSubscribers.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/NewsletterSection.tsx",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/AdminDashboardPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-11",
+        "summary": "Generate static image assets for the application: (1) A hero background fallback image for the home page (in case the video cannot load), showing a cinematic nightclub interior in black and gold tones. (2) A 'Kala Ghoda' logo/wordmark in gold on transparent background. (3) Three placeholder event poster images in dark luxury style for the seeded demo events. (4) A gallery grid of 6 atmospheric nightclub photos for the home page gallery preview.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/components/EventCard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/components/EventCard.tsx"
+        ]
+      },
+      {
+        "id": "REQ-12",
+        "summary": "Seed the backend with 3 demo events on first initialization so the app is visually populated on first load without requiring admin setup. Each demo event should have a title, description, date set in the near future, ticket price, poster image reference, and Upcoming status.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Build the Home Page with the following sections in order: (1) Full-screen hero section with an auto-playing looping background video (club atmosphere), the 'Kala Ghoda' logo/wordmark centered, tagline 'Where Nights Come Alive', and two CTA buttons: 'View Upcoming Events' and 'Book Now'; (2) About section with a short intro paragraph about the club; (3) Upcoming Events preview showing the 3 most recent upcoming events as cards (event poster image, title, date, short description); (4) Gallery preview section showing a grid of sample club images; (5) Contact section with a placeholder Google Maps embed, phone number, and Instagram link; (6) Footer with social media icons (Instagram, Facebook, WhatsApp).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/hooks/useGetRecentUpcomingEvents.ts",
+          "frontend/src/components/EventCard.tsx",
+          "frontend/src/components/Footer.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/components/EventCard.tsx",
+          "frontend/src/components/Footer.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Build a dedicated Events Page at route /events displaying all events in a responsive grid layout. Each event card must show: event poster image, event title, date and time, short description, and a 'View Details' button that navigates to the individual event page. Events with 'Upcoming' status should be listed first; 'Past' events should be visually distinguished (e.g. desaturated or labeled).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/EventsPage.tsx",
+          "frontend/src/hooks/useGetAllEvents.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/EventsPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Build an Individual Event Detail Page at route /events/:id. The page must include: a large full-width banner image (event poster), full event description, a horizontally scrollable or slider-style photo gallery for the event's uploaded photos (with lightbox on click), an embedded video player for the event video URL, a ticket price section, a prominent 'Book Now' button, and a live countdown timer showing days/hours/minutes/seconds until the event date.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/EventDetailPage.tsx",
+          "frontend/src/hooks/useGetEventById.ts",
+          "frontend/src/components/CountdownTimer.tsx",
+          "frontend/src/components/PhotoGallerySlider.tsx",
+          "frontend/src/components/Lightbox.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/EventDetailPage.tsx",
+          "frontend/src/components/CountdownTimer.tsx",
+          "frontend/src/components/PhotoGallerySlider.tsx",
+          "frontend/src/components/Lightbox.tsx"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Implement the backend data model and API for events. Each event must store: title, short description, full description, event date and time, ticket price, poster image (stored as base64 or URL), array of photo gallery images, video URL or embedded link, status (Upcoming | Past), and creation timestamp. Expose query functions to: list all events, get a single event by ID, and get the 3 most recent upcoming events for the home page.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Implement backend update functions for event management: createEvent, updateEvent, deleteEvent, and toggleEventStatus. These must support all fields defined in the event data model.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Build a secure Admin Dashboard at route /admin. Protect the dashboard with a hardcoded credential login screen (username + password stored in backend, no external auth). On login, store a session token in localStorage and validate it on each admin page visit. The dashboard must support: adding a new event (form with all fields), editing an existing event, deleting an event (with confirmation), uploading event poster, multiple gallery photos, and a video URL, toggling event status between Upcoming and Past.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/AdminLoginPage.tsx",
+          "frontend/src/pages/AdminDashboardPage.tsx",
+          "frontend/src/pages/AdminAddEventPage.tsx",
+          "frontend/src/pages/AdminEditEventPage.tsx",
+          "frontend/src/hooks/useCreateEvent.ts",
+          "frontend/src/hooks/useUpdateEvent.ts",
+          "frontend/src/hooks/useDeleteEvent.ts",
+          "frontend/src/hooks/useToggleEventStatus.ts",
+          "frontend/src/components/AdminRoute.tsx",
+          "frontend/src/components/ConfirmDeleteModal.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/AdminLoginPage.tsx",
+          "frontend/src/pages/AdminDashboardPage.tsx",
+          "frontend/src/components/AdminRoute.tsx",
+          "frontend/src/components/ConfirmDeleteModal.tsx"
+        ]
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Add a smooth scroll-reveal animation system so that sections animate into view as the user scrolls down (fade-in + slight upward translate). Apply these animations to the About section, Upcoming Events cards, Gallery preview, and Contact section on the Home page, and to event cards on the Events page.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useScrollReveal.ts",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/EventsPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useScrollReveal.ts",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/EventsPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-9",
+        "summary": "Add a floating WhatsApp booking button fixed to the bottom-right corner of every page. The button should link to a WhatsApp chat URL (wa.me/ format) with a pre-filled message like 'Hi, I'd like to book a table at Kala Ghoda'. Use a WhatsApp green icon with gold border styling to match the brand.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/WhatsAppButton.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/WhatsAppButton.tsx",
+          "frontend/src/App.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/authorization/MixinAuthorization.mo",
+    "backend/authorization/access-control.mo",
+    "backend/main.mo",
+    "build-request.json",
+    "build-template/Dockerfile",
+    "build-template/LICENSE",
+    "build-template/README.md",
+    "build-template/deploy.sh",
+    "build-template/icp.yaml",
+    "build-template/package.json",
+    "build-template/pnpm-lock.yaml",
+    "build-template/pnpm-workspace.yaml",
+    "build-template/scripts/prune-unused-images.js",
+    "build-template/scripts/resize-images.js",
+    "build-template/src/backend/canister.yaml",
+    "build-template/src/backend/system-idl/aaaaa-aa.did",
+    "build-template/src/frontend/canister.yaml",
+    "build-template/src/frontend/components.json",
+    "build-template/src/frontend/env.json",
+    "build-template/src/frontend/eslint-rules/no-bigint-in-query-keys.js",
+    "build-template/src/frontend/eslint-rules/require-internet-identity-provider.js",
+    "build-template/src/frontend/eslint.config.js",
+    "build-template/src/frontend/package.json",
+    "build-template/src/frontend/postcss.config.js",
+    "build-template/src/frontend/src/components/ui/accordion.tsx",
+    "build-template/src/frontend/src/components/ui/alert-dialog.tsx",
+    "build-template/src/frontend/src/components/ui/alert.tsx",
+    "build-template/src/frontend/src/components/ui/aspect-ratio.tsx",
+    "build-template/src/frontend/src/components/ui/avatar.tsx",
+    "build-template/src/frontend/src/components/ui/badge.tsx",
+    "build-template/src/frontend/src/components/ui/breadcrumb.tsx",
+    "build-template/src/frontend/src/components/ui/button.tsx",
+    "build-template/src/frontend/src/components/ui/calendar.tsx",
+    "build-template/src/frontend/src/components/ui/card.tsx",
+    "build-template/src/frontend/src/components/ui/carousel.tsx",
+    "build-template/src/frontend/src/components/ui/chart.tsx",
+    "build-template/src/frontend/src/components/ui/checkbox.tsx",
+    "build-template/src/frontend/src/components/ui/collapsible.tsx",
+    "build-template/src/frontend/src/components/ui/command.tsx",
+    "build-template/src/frontend/src/components/ui/context-menu.tsx",
+    "build-template/src/frontend/src/components/ui/dialog.tsx",
+    "build-template/src/frontend/src/components/ui/drawer.tsx",
+    "build-template/src/frontend/src/components/ui/dropdown-menu.tsx",
+    "build-template/src/frontend/src/components/ui/form.tsx",
+    "build-template/src/frontend/src/components/ui/hover-card.tsx",
+    "build-template/src/frontend/src/components/ui/input-otp.tsx",
+    "build-template/src/frontend/src/components/ui/input.tsx",
+    "build-template/src/frontend/src/components/ui/label.tsx",
+    "build-template/src/frontend/src/components/ui/menubar.tsx",
+    "build-template/src/frontend/src/components/ui/navigation-menu.tsx",
+    "build-template/src/frontend/src/components/ui/pagination.tsx",
+    "build-template/src/frontend/src/components/ui/popover.tsx",
+    "build-template/src/frontend/src/components/ui/progress.tsx",
+    "build-template/src/frontend/src/components/ui/radio-group.tsx",
+    "build-template/src/frontend/src/components/ui/resizable.tsx",
+    "build-template/src/frontend/src/components/ui/scroll-area.tsx",
+    "build-template/src/frontend/src/components/ui/select.tsx",
+    "build-template/src/frontend/src/components/ui/separator.tsx",
+    "build-template/src/frontend/src/components/ui/sheet.tsx",
+    "build-template/src/frontend/src/components/ui/sidebar.tsx",
+    "build-template/src/frontend/src/components/ui/skeleton.tsx",
+    "build-template/src/frontend/src/components/ui/slider.tsx",
+    "build-template/src/frontend/src/components/ui/sonner.tsx",
+    "build-template/src/frontend/src/components/ui/switch.tsx",
+    "build-template/src/frontend/src/components/ui/table.tsx",
+    "build-template/src/frontend/src/components/ui/tabs.tsx",
+    "build-template/src/frontend/src/components/ui/textarea.tsx",
+    "build-template/src/frontend/src/components/ui/toggle-group.tsx",
+    "build-template/src/frontend/src/components/ui/toggle.tsx",
+    "build-template/src/frontend/src/components/ui/tooltip.tsx",
+    "build-template/src/frontend/src/hooks/use-mobile.tsx",
+    "build-template/src/frontend/src/lib/utils.ts",
+    "build-template/src/frontend/tsconfig.json",
+    "build-template/src/frontend/vite.config.js",
+    "build-template/tsconfig.json",
+    "caffeine.lock.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/public/assets/generated/event-poster-1.dim_600x800.png",
+    "frontend/public/assets/generated/event-poster-2.dim_600x800.png",
+    "frontend/public/assets/generated/event-poster-3.dim_600x800.png",
+    "frontend/public/assets/generated/gallery-1.dim_800x600.png",
+    "frontend/public/assets/generated/gallery-2.dim_800x600.png",
+    "frontend/public/assets/generated/gallery-3.dim_800x600.png",
+    "frontend/public/assets/generated/gallery-4.dim_800x600.png",
+    "frontend/public/assets/generated/gallery-5.dim_800x600.png",
+    "frontend/public/assets/generated/gallery-6.dim_800x600.png",
+    "frontend/public/assets/generated/hero-fallback.dim_1920x1080.png",
+    "frontend/public/assets/generated/logo-wordmark.dim_600x200.png",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/AdminRoute.tsx",
+    "frontend/src/components/ConfirmDeleteModal.tsx",
+    "frontend/src/components/CountdownTimer.tsx",
+    "frontend/src/components/EventCard.tsx",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/Lightbox.tsx",
+    "frontend/src/components/Navbar.tsx",
+    "frontend/src/components/NewsletterSection.tsx",
+    "frontend/src/components/PhotoGallerySlider.tsx",
+    "frontend/src/components/WhatsAppButton.tsx",
+    "frontend/src/config.ts",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/hooks/useScrollReveal.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/AdminDashboardPage.tsx",
+    "frontend/src/pages/AdminEventFormPage.tsx",
+    "frontend/src/pages/AdminLoginPage.tsx",
+    "frontend/src/pages/EventDetailPage.tsx",
+    "frontend/src/pages/EventsPage.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/ui-summary.json",
+    "frontend/src/utils/StorageClient.ts",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

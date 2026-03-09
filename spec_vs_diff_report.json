@@ -1,0 +1,107 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-24T11:21:25.065Z",
+  "summary": "The diff implements a comprehensive nightclub website with most requirements addressed. However, several critical constraints from the build request are violated: the authentication system uses Internet Identity (ICP's auth provider) instead of hardcoded credentials checked against backend, seed data requires an admin-only initialize() call rather than automatic first-load seeding, and several image assets are missing from the diff.",
+  "missing_requirements": [
+    {
+      "id": "REQ-7",
+      "requirement": "Admin login must use hardcoded credentials (username + password stored in backend, no external auth). Store session token in localStorage and validate on each admin page visit.",
+      "reason": "The diff uses Internet Identity (useInternetIdentity hook, AuthClient, ICP identity) for admin authentication instead of hardcoded credentials checked against backend. AdminRoute.tsx checks isCallerAdmin via ICP identity, not a localStorage session token from hardcoded credential login.",
+      "evidence": [
+        "frontend/src/components/AdminRoute.tsx",
+        "frontend/src/hooks/useInternetIdentity.ts",
+        "frontend/src/pages/AdminDashboardPage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "requirement": "Seed the backend with 3 demo events on first canister initialization automatically, without requiring admin setup.",
+      "reason": "In backend/main.mo, the initialize() function that seeds events is guarded by an admin permission check, meaning it requires an authenticated admin caller rather than running automatically on first canister initialization.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "requirement": "All generated images must be served from frontend/public/assets/generated.",
+      "reason": "No image asset files are present in the diff. No files under frontend/public/assets/generated/ appear among the 31 added files shown.",
+      "evidence": []
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Internet Identity (ICP) integration for authentication instead of hardcoded credentials",
+      "reason": "The build request explicitly states no external authentication providers and that admin login must use hardcoded credentials checked against backend. The implementation uses Internet Identity, AuthClient, DelegationIdentity, and InternetIdentityProvider, which was explicitly forbidden.",
+      "evidence": [
+        "frontend/src/hooks/useInternetIdentity.ts",
+        "frontend/src/components/AdminRoute.tsx",
+        "frontend/src/components/Navbar.tsx",
+        "frontend/src/hooks/useActor.ts",
+        "frontend/src/main.tsx"
+      ]
+    },
+    {
+      "description": "UserProfile data model and associated backend functions",
+      "reason": "The build request does not specify any user profile functionality. The backend includes a UserProfile type with name/email fields and associated query/update functions that were not requested.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Public-facing Login/Logout button in Navbar using Internet Identity for all site visitors",
+      "reason": "The build request does not call for a public-facing login button in the navbar. Authentication was meant only for the admin section using hardcoded credentials, not an Internet Identity login accessible to all visitors.",
+      "evidence": [
+        "frontend/src/components/Navbar.tsx"
+      ]
+    },
+    {
+      "description": "Principal-based AccessControl and MixinAuthorization modules",
+      "reason": "The build request specifies a simple session token pattern with hardcoded credentials, not a principal-based access control system using ICP caller identity.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "_initializeAccessControlWithSecret called with caffeineAdminToken URL parameter",
+      "reason": "This framework-specific access control initialization pattern was not requested. The build request asks for hardcoded credentials in the backend checked during login, not a secret token passed via URL parameters.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts"
+      ]
+    }
+  ],
+  "confidence": 0.75,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/AdminRoute.tsx",
+    "frontend/src/components/ConfirmDeleteModal.tsx",
+    "frontend/src/components/CountdownTimer.tsx",
+    "frontend/src/components/EventCard.tsx",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/Lightbox.tsx",
+    "frontend/src/components/Navbar.tsx",
+    "frontend/src/components/NewsletterSection.tsx",
+    "frontend/src/components/PhotoGallerySlider.tsx",
+    "frontend/src/components/WhatsAppButton.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/hooks/useScrollReveal.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/AdminDashboardPage.tsx",
+    "frontend/src/pages/AdminEventFormPage.tsx",
+    "frontend/src/pages/AdminLoginPage.tsx",
+    "frontend/src/pages/EventDetailPage.tsx",
+    "frontend/src/pages/EventsPage.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

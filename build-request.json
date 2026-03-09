@@ -1,0 +1,329 @@
+{
+  "kind": "build_request",
+  "title": "Kala Ghoda – Premium Dark-Themed Nightclub Website",
+  "projectName": "Kala Ghoda",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement a black-and-gold luxury design system across the entire app: deep black backgrounds (#0a0a0a, #111111), gold accent color (#C9A84C / #FFD700 range), bold serif or display font for headings (e.g. Cinzel or Playfair Display via Google Fonts), modern sans-serif for body text, gold hover effects on interactive elements, subtle gold glow animations on key UI elements, and smooth page transitions throughout.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Elegant black and gold aesthetic (luxury nightlife vibe)",
+          "Bold luxury font for headings",
+          "Gold hover effects",
+          "Subtle glow animations",
+          "Smooth page transitions"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All pages use deep black backgrounds with gold accent colors consistently",
+        "Headings render in a bold luxury display font loaded from Google Fonts",
+        "Interactive elements (buttons, links, cards) display gold hover/glow effects",
+        "Page transitions are smooth (fade or slide) between routes",
+        "Design is visually cohesive and premium across all pages"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Build the Home Page with the following sections in order: (1) Full-screen hero section with an auto-playing looping background video (club atmosphere), the 'Kala Ghoda' logo/wordmark centered, tagline 'Where Nights Come Alive', and two CTA buttons: 'View Upcoming Events' and 'Book Now'; (2) About section with a short intro paragraph about the club; (3) Upcoming Events preview showing the 3 most recent upcoming events as cards (event poster image, title, date, short description); (4) Gallery preview section showing a grid of sample club images; (5) Contact section with a placeholder Google Maps embed, phone number, and Instagram link; (6) Footer with social media icons (Instagram, Facebook, WhatsApp).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Hero section with full-screen background video",
+          "Club logo \"Kala Ghoda\" centered with tagline",
+          "CTA buttons: View Upcoming Events / Book Now",
+          "About section",
+          "Highlight 3 upcoming events",
+          "Gallery preview section",
+          "Contact section (map + phone + Instagram link)",
+          "Footer with social media icons"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Hero video fills the full viewport, auto-plays muted and loops",
+        "'Kala Ghoda' logo/wordmark and tagline are centered over the hero",
+        "Both CTA buttons are visible and functional (navigate to Events page or Book Now flow)",
+        "About section renders introductory club description text",
+        "Upcoming events preview shows up to 3 event cards pulled from backend data",
+        "Gallery preview section displays a responsive image grid",
+        "Contact section includes an embedded map placeholder, phone number, and Instagram link",
+        "Footer displays Instagram, Facebook, and WhatsApp icons with placeholder links"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Build a dedicated Events Page at route /events displaying all events in a responsive grid layout. Each event card must show: event poster image, event title, date and time, short description, and a 'View Details' button that navigates to the individual event page. Events with 'Upcoming' status should be listed first; 'Past' events should be visually distinguished (e.g. desaturated or labeled).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Separate Events Page",
+          "Grid layout of upcoming events",
+          "Each event card should include: Event poster image, Event title, Date & Time, Short description, \"View Details\" button"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Route /events renders correctly",
+        "Events are fetched from the backend and displayed in a responsive grid",
+        "Each card shows poster image, title, date/time, short description, and 'View Details' button",
+        "Upcoming events are prioritized in sort order",
+        "Past events are visually differentiated from upcoming ones"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Build an Individual Event Detail Page at route /events/:id. The page must include: a large full-width banner image (event poster), full event description, a horizontally scrollable or slider-style photo gallery for the event's uploaded photos (with lightbox on click), an embedded video player for the event video URL, a ticket price section, a prominent 'Book Now' button, and a live countdown timer showing days/hours/minutes/seconds until the event date.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Large banner image",
+          "Full event description",
+          "Photo gallery slider",
+          "Embedded event video",
+          "Ticket price section",
+          "\"Book Now\" button",
+          "Countdown timer for event"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Route /events/:id loads event data from backend by ID",
+        "Large banner image renders at full width",
+        "Photo gallery slider shows multiple event photos with lightbox on click",
+        "Embedded video player renders using the event's video URL",
+        "Ticket price is clearly displayed",
+        "'Book Now' button is prominent and styled with gold accent",
+        "Countdown timer accurately counts down to the event date/time and updates every second"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Implement the backend data model and API for events. Each event must store: title, short description, full description, event date and time, ticket price, poster image (stored as base64 or URL), array of photo gallery images, video URL or embedded link, status (Upcoming | Past), and creation timestamp. Expose query functions to: list all events, get a single event by ID, and get the 3 most recent upcoming events for the home page.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Add new event",
+          "Edit event",
+          "Delete event",
+          "Upload: Event poster image, Multiple event photos, Event video",
+          "Add event date & time",
+          "Add ticket price",
+          "Toggle event status (Upcoming / Past)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Event data model includes all specified fields",
+        "listEvents query returns all events sorted by date",
+        "getEvent(id) query returns a single event or null",
+        "getUpcomingEvents(limit) returns the N most recent upcoming events",
+        "Data persists in stable backend storage"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Implement backend update functions for event management: createEvent, updateEvent, deleteEvent, and toggleEventStatus. These must support all fields defined in the event data model.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Add new event",
+          "Edit event",
+          "Delete event",
+          "Toggle event status (Upcoming / Past)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "createEvent inserts a new event and returns its ID",
+        "updateEvent modifies an existing event by ID",
+        "deleteEvent removes an event by ID",
+        "toggleEventStatus switches an event between Upcoming and Past",
+        "Only authenticated admin callers can invoke mutation functions"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Build a secure Admin Dashboard at route /admin. Protect the dashboard with a hardcoded credential login screen (username + password stored in backend, no external auth). On login, store a session token in localStorage and validate it on each admin page visit. The dashboard must support: adding a new event (form with all fields), editing an existing event, deleting an event (with confirmation), uploading event poster, multiple gallery photos, and a video URL, toggling event status between Upcoming and Past.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a secure Admin Dashboard with login authentication",
+          "Add new event",
+          "Edit event",
+          "Delete event",
+          "Upload: Event poster image, Multiple event photos, Event video",
+          "Toggle event status (Upcoming / Past)",
+          "All events added from admin should automatically appear on: Home page, Events page, Individual event page"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Navigating to /admin without a valid session redirects to /admin/login",
+        "Login form accepts credentials and stores session token on success",
+        "Admin dashboard lists all events with Edit, Delete, and Toggle Status actions",
+        "Add/Edit event form includes fields for all event data model properties",
+        "Photo upload supports selecting multiple images (stored as base64 or data URLs)",
+        "Deleting an event requires a confirmation step",
+        "Changes made in admin are immediately reflected on the Home, Events, and Event Detail pages"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Add a smooth scroll-reveal animation system so that sections animate into view as the user scrolls down (fade-in + slight upward translate). Apply these animations to the About section, Upcoming Events cards, Gallery preview, and Contact section on the Home page, and to event cards on the Events page.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Smooth scroll animations",
+          "Smooth page transitions"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Elements off-screen are initially invisible",
+        "Sections animate in (fade + translate) as they enter the viewport during scroll",
+        "Animations trigger once and do not repeat on scroll-up",
+        "Animations do not cause layout shifts or performance issues"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Add a floating WhatsApp booking button fixed to the bottom-right corner of every page. The button should link to a WhatsApp chat URL (wa.me/ format) with a pre-filled message like 'Hi, I'd like to book a table at Kala Ghoda'. Use a WhatsApp green icon with gold border styling to match the brand.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "WhatsApp booking button"
+        ]
+      },
+      "acceptanceCriteria": [
+        "WhatsApp button is visible and fixed to bottom-right on all pages",
+        "Clicking the button opens WhatsApp with a pre-filled booking message",
+        "Button is styled with brand-consistent gold border and WhatsApp green",
+        "Button does not obscure critical page content"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Add a Newsletter Subscription section on the Home Page (above the footer). It should include a heading like 'Stay in the Loop', a brief description, an email input field, and a 'Subscribe' button. Store subscriber emails in the backend with a subscribeNewsletter(email) function and a listSubscribers query for admin visibility.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Newsletter subscription"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Newsletter section renders above the footer on the Home page",
+        "Email input validates format before submission",
+        "On successful submission, a confirmation message is shown",
+        "Subscriber email is persisted in backend storage",
+        "Admin dashboard shows a count or list of subscribers"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Generate static image assets for the application: (1) A hero background fallback image for the home page (in case the video cannot load), showing a cinematic nightclub interior in black and gold tones. (2) A 'Kala Ghoda' logo/wordmark in gold on transparent background. (3) Three placeholder event poster images in dark luxury style for the seeded demo events. (4) A gallery grid of 6 atmospheric nightclub photos for the home page gallery preview.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Hero section with full-screen background video",
+          "Club logo \"Kala Ghoda\"",
+          "Highlight 3 upcoming events (with image)",
+          "Gallery preview section"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Hero fallback image renders correctly if video is unavailable",
+        "Logo image is displayed in the hero section and navbar",
+        "Three distinct event poster images are used for seeded demo events",
+        "Six gallery images populate the home page gallery grid",
+        "All images are served from frontend/public/assets/generated"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Seed the backend with 3 demo events on first initialization so the app is visually populated on first load without requiring admin setup. Each demo event should have a title, description, date set in the near future, ticket price, poster image reference, and Upcoming status.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Highlight 3 upcoming events",
+          "All events added from admin should automatically appear on: Home page (Upcoming section), Events page"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On first canister initialization, 3 demo events are created automatically",
+        "Each demo event has all required fields populated",
+        "Demo events appear on the Home page upcoming section and Events page immediately",
+        "Seed data is not duplicated on subsequent upgrades"
+      ]
+    }
+  ],
+  "constraints": [
+    "Use only Motoko for backend — no Node.js, Express, or MongoDB",
+    "Use only React + TypeScript + Tailwind CSS for frontend — no Next.js",
+    "No external authentication providers — admin login must use hardcoded credentials checked against backend",
+    "No real-time WebSocket features",
+    "No external email service for newsletter — store emails in backend only",
+    "No Google Maps SDK — use a static iframe embed placeholder",
+    "No Instagram API integration — use a static placeholder or link only",
+    "All generated images must be served from frontend/public/assets/generated",
+    "Do not modify any files under frontend/src/hooks/ or frontend/src/components/ui"
+  ],
+  "nonGoals": [
+    "Real payment processing or ticketing system integration",
+    "Live Instagram feed API integration",
+    "Real Google Maps API with dynamic markers",
+    "Email delivery for newsletter subscribers",
+    "JWT-based authentication (use simple session token pattern instead)",
+    "Rust, Python, or any non-Motoko backend language",
+    "Server-side rendering or Next.js features",
+    "Mobile app or PWA features",
+    "Multi-language / i18n support"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Cinematic nightclub interior with dramatic lighting, dark atmosphere, gold and amber light rays, crowded dance floor viewed from above (hero-fallback.dim_1920x1080.png)",
+      "Elegant gold wordmark text 'KALA GHODA' in a bold luxury serif font on a transparent black background with subtle gold glow (logo-wordmark.dim_600x200.png)",
+      "Dark luxury event poster with abstract geometric gold patterns, DJ silhouette, bold text placeholder area, deep black background – Event 1 (event-poster-1.dim_600x800.png)",
+      "Dark luxury event poster with gold circular mandala motif, smoky atmosphere, deep navy-black gradient – Event 2 (event-poster-2.dim_600x800.png)",
+      "Dark luxury event poster with gold confetti explosion, champagne glasses silhouette, rich black background – Event 3 (event-poster-3.dim_600x800.png)",
+      "Atmospheric nightclub interior, crowd on dance floor, dramatic red and gold stage lighting (gallery-1.dim_800x600.png)",
+      "Close-up of a gold cocktail drink on a dark bar surface with bokeh background lights (gallery-2.dim_800x600.png)",
+      "VIP lounge area with plush dark velvet seating, gold accents, ambient low lighting (gallery-3.dim_800x600.png)",
+      "DJ booth with turntables, neon gold glow, crowd silhouettes in the background (gallery-4.dim_800x600.png)",
+      "Aerial view of a nightclub dance floor with laser light show in gold and white (gallery-5.dim_800x600.png)",
+      "Bartender pouring a glowing cocktail at a dark marble bar with gold fixtures (gallery-6.dim_800x600.png)"
+    ],
+    "edits": []
+  }
+}
